@@ -29,13 +29,14 @@ galleryEl.addEventListener('click', onGalleryItemClick);
 
 function onGalleryItemClick(e) {
    e.preventDefault();
-   console.log(e);
 
    const isGalleryImageEl = e.target.classList.contains('gallery__image');
 
    if (!isGalleryImageEl) {
       return;
    }
+
+   document.addEventListener('keydown', onEscClose);
 
    const sourceLargeImageEl = e.target.getAttribute('data-source');
 
@@ -46,10 +47,11 @@ function onGalleryItemClick(e) {
 
    instance.show();
 
-   galleryEl.addEventListener('keydown', e => {
+   function onEscClose(e) {
       const ESC_KEY_CODE = 'Escape';
       if (e.code === ESC_KEY_CODE) {
          instance.close();
+         document.removeEventListener('keydown', onEscClose);
       }
-   });
+   }
 }
