@@ -8,7 +8,8 @@ function createGalleryItemsMarkup(galleryItems) {
       .map(({ preview, original, description }) => {
          return `
         <div class="gallery__item">
-            <a class="gallery__link" href="large-image.jpg">
+            <a class="gallery__link"
+            href="${original}">
                <img
                   class="gallery__image"
                   src="${preview}"
@@ -36,33 +37,19 @@ function onGalleryItemClick(e) {
       return;
    }
 
-   const opts = {
-      // closable: true,
-
-      // className: '',
-
-      onShow: instance => {
-         window.addEventListener('keydown', onCloseModalKeyEsc);
-      },
-
-      onClose: instance => {
-         window.removeEventListener('keydown', onCloseModalKeyEsc);
-      },
-   };
-
    const sourceLargeImageEl = e.target.getAttribute('data-source');
 
    const instance = basicLightbox.create(
       `
-    <img src="${sourceLargeImageEl}" width="800" height="600">`,
-      opts
+    <img src="${sourceLargeImageEl}" width="800" height="600">`
    );
 
    instance.show();
-}
 
-function onCloseModalKeyEsc(e) {
-   const ESC_KEY_CODE = 'Escape';
-   if (e.code === ESC_KEY_CODE) {
-   }
+   galleryEl.addEventListener('keydown', e => {
+      const ESC_KEY_CODE = 'Escape';
+      if (e.code === ESC_KEY_CODE) {
+         instance.close();
+      }
+   });
 }
