@@ -1,7 +1,10 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
 const galleryEl = document.querySelector('.gallery');
+
 const galleryItemsMarkup = createGalleryItemsMarkup(galleryItems);
+
+galleryEl.insertAdjacentHTML('beforeend', galleryItemsMarkup);
 
 function createGalleryItemsMarkup(galleryItems) {
    return galleryItems
@@ -22,8 +25,6 @@ function createGalleryItemsMarkup(galleryItems) {
       })
       .join('');
 }
-
-galleryEl.insertAdjacentHTML('beforeend', galleryItemsMarkup);
 
 galleryEl.addEventListener('click', onGalleryItemClick);
 
